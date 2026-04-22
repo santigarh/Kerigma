@@ -22,7 +22,7 @@ Diseñada para quienes quieren predicar con profundidad, claridad y propósito.
 
 ## Demo
 
-🔗 [kerigma.santigarh.github.io](https://santigarh.github.io/kerigma)
+🔗 [kerigma.santigarh.github.io](https://santigarh.github.io/Kerigma)
 
 ---
 
@@ -75,7 +75,7 @@ kerigma/
 
 ## Contribuir
 
-Las sugerencias son bienvenidas. Puedes abrir un [issue](https://github.com/santigarh/kerigma/issues) para reportar un problema o proponer una mejora.
+Las sugerencias son bienvenidas. Puedes abrir un [issue](https://github.com/santigarh/Kerigma/issues) para reportar un problema o proponer una mejora.
 
 ---
 
