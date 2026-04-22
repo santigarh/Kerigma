@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kerigma</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --cream:       #FAF7F2;
+  --cream-mid:   #F3EEE5;
+  --cream-dark:  #E8E0D0;
+  --ink:         #1C1915;
+  --ink-mid:     #4A4540;
+  --ink-soft:    #7A746C;
+  --ink-mute:    #AEA89E;
+  --gold:        #B8882A;
+  --gold-light:  #F5EDDA;
+  --gold-border: #D4AA5A;
+  --blue-tint:   #EBF1F8;
+  --blue-mid:    #3D6FA8;
+  --blue-text:   #1B4A7A;
+  --purple-tint: #EEECF9;
+  --purple-text: #3C2F8A;
+  --green-tint:  #EBF4E4;
+  --green-text:  #285A1A;
+  --coral-tint:  #FAECE7;
+  --coral-text:  #712B13;
+  --amber-tint:  #FEF3DD;
+  --amber-text:  #7A4A08;
+  --rose-tint:   #FBEAF0;
+  --rose-text:   #72243E;
+  --sage-tint:   #EFF6EA;
+  --sage-text:   #2E5E1E;
+  --shadow-sm:   0 1px 3px rgba(28,25,21,.07), 0 1px 2px rgba(28,25,21,.05);
+  --shadow-md:   0 4px 12px rgba(28,25,21,.09), 0 2px 4px rgba(28,25,21,.06);
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Lora', Georgia, serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cream:       #1A1815;
+    --cream-mid:   #242119;
+    --cream-dark:  #2E2B23;
+    --ink:         #F0EAE0;
+    --ink-mid:     #C8C0B4;
+    --ink-soft:    #968E82;
+    --ink-mute:    #5C5650;
+    --gold:        #D4A850;
+    --gold-light:  #2A2416;
+    --gold-border: #7A6030;
+    --blue-tint:   #0F1E30;
+    --blue-mid:    #6A9FCC;
+    --blue-text:   #A8CCEE;
+    --purple-tint: #1A1630;
+    --purple-text: #B0A8E8;
+    --green-tint:  #0F1E0A;
+    --green-text:  #8EC87A;
+    --coral-tint:  #2A1410;
+    --coral-text:  #E8A890;
+    --amber-tint:  #261A06;
+    --amber-text:  #E8C070;
+    --rose-tint:   #24101A;
+    --rose-text:   #E8A0C0;
+    --sage-tint:   #101E0C;
+    --sage-text:   #90CC78;
+    --shadow-sm:   0 1px 3px rgba(0,0,0,.3);
+    --shadow-md:   0 4px 12px rgba(0,0,0,.4);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--cream);
+  min-height: 100vh;
+}
+
+.app-shell {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* ── Header ── */
+.app-header {
+  text-align: center;
+  padding: 2.5rem 0 2rem;
+  border-bottom: 1px solid var(--cream-dark);
+  margin-bottom: 2rem;
+}
+
+.app-header .ornament {
+  font-size: 24px;
+  color: var(--gold);
+  letter-spacing: 8px;
+  display: block;
+  margin-bottom: .75rem;
+}
+
+.app-header h1 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+
+.app-header p {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: .4rem;
+  font-style: italic;
+  font-family: var(--font-display);
+}
+
+/* ── Progress ── */
+.progress-wrap {
+  margin-bottom: 2rem;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 6px;
+}
+
+.progress-bar {
+  height: 3px;
+  background: var(--cream-dark);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-border));
+  border-radius: 2px;
+  transition: width .4s ease;
+  width: 0%;
+}
+
+/* ── Meta grid ── */
+.meta-section {
+  background: var(--cream-mid);
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--r-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.meta-section-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+}
+
+.meta-grid .full { grid-column: 1 / -1; }
+
+/* ── Labels & inputs ── */
+label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 4px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 8px 11px;
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--r-sm);
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  resize: vertical;
+  -webkit-appearance: none;
+}
+
+input::placeholder, textarea::placeholder { color: var(--ink-mute); }
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold-border);
+  box-shadow: 0 0 0 3px rgba(184,136,42,.12);
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23AEA89E' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+  cursor: pointer;
+}
+
+/* ── Tags ── */
+.tag-wrap { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+
+.tag {
+  font-size: 12px;
+  padding: 4px 13px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 1px solid var(--cream-dark);
+  color: var(--ink-soft);
+  background: var(--cream);
+  font-family: var(--font-body);
+  transition: all .15s;
+  user-select: none;
+}
+
+.tag:hover { border-color: var(--gold-border); color: var(--gold); }
+
+.tag.sel {
+  background: var(--gold-light);
+  color: var(--gold);
+  border-color: var(--gold-border);
+  font-weight: 500;
+}
+
+/* ── Section cards ── */
+.section-card {
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--r-lg);
+  margin-bottom: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .2s;
+}
+
+.section-card:has(.section-body.open) {
+  box-shadow: var(--shadow-md);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--cream-mid);
+  transition: background .15s;
+}
+
+.section-header:hover { background: var(--cream-dark); }
+
+.section-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  flex-shrink: 0;
+  font-family: var(--font-body);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  flex: 1;
+}
+
+.section-hint {
+  font-size: 11px;
+  color: var(--ink-mute);
+  font-style: italic;
+  font-family: var(--font-display);
+}
+
+.chevron {
+  font-size: 10px;
+  color: var(--ink-mute);
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+
+.chevron.open { transform: rotate(90deg); }
+
+.section-body {
+  padding: 16px;
+  border-top: 1px solid var(--cream-dark);
+  display: none;
+  background: var(--cream);
+}
+
+.section-body.open { display: block; }
+
+.sub-field { margin-bottom: 14px; }
+.sub-field:last-child { margin-bottom: 0; }
+
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ── Actions ── */
+.actions-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--cream-dark);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+button {
+  padding: 9px 18px;
+  border-radius: var(--r-md);
+  font-size: 13px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--cream-dark);
+  background: var(--cream-mid);
+  color: var(--ink-mid);
+  transition: all .15s;
+  letter-spacing: .01em;
+}
+
+button:hover {
+  background: var(--cream-dark);
+  color: var(--ink);
+}
+
+.btn-primary {
+  background: var(--gold-light);
+  border-color: var(--gold-border);
+  color: var(--gold);
+}
+
+.btn-primary:hover {
+  background: var(--gold-border);
+  color: #fff;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+}
+
+.btn-ghost:hover {
+  background: var(--cream-mid);
+  color: var(--ink);
+}
+
+.copied-msg {
+  font-size: 12px;
+  color: var(--green-text);
+  font-style: italic;
+  display: none;
+  font-family: var(--font-display);
+}
+
+/* ── Export output ── */
+.export-wrap {
+  margin-top: 1.5rem;
+  display: none;
+}
+
+.export-wrap-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--ink-mute);
+  margin-bottom: 8px;
+}
+
+.export-out {
+  background: var(--cream-mid);
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--r-md);
+  padding: 16px;
+  font-size: 12.5px;
+  white-space: pre-wrap;
+  font-family: 'Courier New', monospace;
+  line-height: 1.75;
+  color: var(--ink-mid);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* ── Responsive ── */
+@media (max-width: 540px) {
+  .meta-grid { grid-template-columns: 1fr; }
+  .meta-grid .full { grid-column: 1; }
+  .row2 { grid-template-columns: 1fr; }
+  .section-hint { display: none; }
+  .app-shell { padding: 1rem 1rem 3rem; }
+}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+  <header class="app-header">
+    <span class="ornament">✦ ✦ ✦</span>
+    <h1>Kerigma</h1>
+    <p>Herramienta de preparación homilética</p>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Avance de preparación</span>
+      <span id="prog-pct">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="prog"></div>
+    </div>
+  </div>
+
+  <!-- META -->
+  <div class="meta-section">
+    <div class="meta-section-title">Información general</div>
+    <div class="meta-grid">
+      <div class="full">
+        <label>Título del sermón</label>
+        <input id="titulo" placeholder="ej. La gracia que transforma — Juan 1:14" oninput="actualizarProgreso()"/>
+      </div>
+      <div>
+        <label>Pasaje principal</label>
+        <input id="pasaje" placeholder="ej. Juan 5:1-15" oninput="actualizarProgreso()"/>
+      </div>
+      <div>
+        <label>Fecha</label>
+        <input id="fecha" type="date" oninput="actualizarProgreso()"/>
+      </div>
+      <div>
+        <label>Predicador</label>
+        <input id="predicador" placeholder="Santiago" oninput="actualizarProgreso()"/>
+      </div>
+      <div>
+        <label>Serie / evento</label>
+        <input id="serie" placeholder="ej. Señales del Evangelio de Juan" oninput="actualizarProgreso()"/>
+      </div>
+      <div class="full">
+        <label>Propósito del sermón</label>
+        <div class="tag-wrap" id="proposito-tags">
+          <span class="tag" onclick="toggleTag(this,'proposito')">Evangelístico</span>
+          <span class="tag" onclick="toggleTag(this,'proposito')">Edificación</span>
+          <span class="tag" onclick="toggleTag(this,'proposito')">Devocional</span>
+          <span class="tag" onclick="toggleTag(this,'proposito')">Doctrinal</span>
+          <span class="tag" onclick="toggleTag(this,'proposito')">Misional</span>
+          <span class="tag" onclick="toggleTag(this,'proposito')">Consagración</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="secciones"></div>
+
+  <div class="actions-section">
+    <button class="btn-primary" onclick="exportar()">↓ Exportar plantilla</button>
+    <button onclick="copiarExport()">Copiar texto</button>
+    <button class="btn-ghost" onclick="limpiar()">Nueva plantilla</button>
+    <span class="copied-msg" id="copied">¡Copiado al portapapeles!</span>
+  </div>
+
+  <div class="export-wrap" id="export-wrap">
+    <div class="export-wrap-label">Texto exportado</div>
+    <div class="export-out" id="export-out"></div>
+  </div>
+
+</div>
+
+<script>
+const SECCIONES = [
+  {
+    id:'gancho', titulo:'Gancho de apertura', badge:'GA',
+    color:'#EBF4E4', colorText:'#285A1A',
+    hint:'Primera impresión — atrapa la atención',
+    campos:[
+      {id:'gancho_tipo', label:'Tipo de apertura', tipo:'select',
+        opts:['Pregunta provocadora','Historia personal','Dato o estadística','Situación cotidiana','Cita relevante','Silencio + versículo']},
+      {id:'gancho_texto', label:'Contenido del gancho', tipo:'textarea', rows:3,
+        ph:'Escribe aquí la apertura — lo que dirás en los primeros 60 segundos...'},
+      {id:'tension', label:'Tensión o necesidad que abre', tipo:'textarea', rows:2,
+        ph:'¿Qué pregunta deja sin respuesta? ¿Qué dolor toca? ¿Qué promete resolver?'}
+    ]
+  },
+  {
+    id:'contexto', titulo:'Contexto del pasaje', badge:'CT',
+    color:'#EBF1F8', colorText:'#1B4A7A',
+    hint:'¿Quién, cuándo, dónde, a quién?',
+    campos:[
+      {id:'ctx_historico', label:'Contexto histórico y cultural', tipo:'textarea', rows:3,
+        ph:'Período, autor, audiencia original, situación política/religiosa...'},
+      {id:'ctx_literario', label:'Contexto literario', tipo:'textarea', rows:2,
+        ph:'¿Qué viene antes y después? ¿En qué tipo de literatura está (narrativa, epístola, profecía)?'},
+      {id:'ctx_canonico', label:'Lugar en la historia redentora', tipo:'textarea', rows:2,
+        ph:'¿Cómo apunta este pasaje a Cristo? ¿Promesa, cumplimiento, tipo?'},
+      {id:'ctx_pasajes', label:'Pasajes paralelos o de apoyo', tipo:'input',
+        ph:'ej. Juan 9:1-7; Marcos 2:1-12; Isaías 35:3-6'}
+    ]
+  },
+  {
+    id:'exegesis', titulo:'Exégesis', badge:'EX',
+    color:'#EEECF9', colorText:'#3C2F8A',
+    hint:'¿Qué dice el texto exactamente?',
+    campos:[
+      {id:'ex_idea', label:'Idea central del pasaje (una oración)', tipo:'input',
+        ph:'ej. Jesús tiene autoridad para sanar y perdonar al que acude a Él en fe'},
+      {id:'ex_estructura', label:'Estructura del pasaje', tipo:'textarea', rows:4,
+        ph:'v.1-3: Escenario — la multitud en el estanque\nv.4-9: El diálogo — pregunta de Jesús\nv.10-15: La respuesta — sanidad y comisión'},
+      {id:'ex_palabras', label:'Palabras o conceptos clave', tipo:'textarea', rows:3,
+        ph:'¿Qué significa "quaeres sanari"? ¿Qué implica "levántate"? Términos griegos/hebreos si aplica...'},
+      {id:'ex_tension', label:'Tensión teológica del texto', tipo:'textarea', rows:2,
+        ph:'¿Qué dificultad plantea el pasaje? ¿Hay algo sorprendente, chocante o contraintuitivo?'}
+    ]
+  },
+  {
+    id:'proposicion', titulo:'Proposición homilética', badge:'PH',
+    color:'#FEF3DD', colorText:'#7A4A08',
+    hint:'Una oración — el sermón en miniatura',
+    campos:[
+      {id:'prop_texto', label:'Proposición (idea central del sermón)', tipo:'textarea', rows:2,
+        ph:'ej. Aunque estemos paralizados por años de fracaso, Jesús nos pregunta si queremos ser libres — y Su palabra es suficiente para levantarnos'},
+      {id:'prop_audiencia', label:'¿A quién le habla este sermón?', tipo:'input',
+        ph:'ej. Creyentes con fe estancada; personas que esperan condiciones ideales para acudir a Dios'},
+      {id:'prop_big_idea', label:'Big idea en lenguaje cotidiano', tipo:'input',
+        ph:'Una línea que cualquier persona recordará al salir...'}
+    ]
+  },
+  {
+    id:'division', titulo:'Puntos principales', badge:'PP',
+    color:'#EBF4E4', colorText:'#285A1A',
+    hint:'2-4 movimientos que desarrollan la proposición',
+    campos:[
+      {id:'pt1', label:'Punto 1', tipo:'input', ph:'Título del primer punto'},
+      {id:'pt1_dev', label:'Desarrollo del punto 1', tipo:'textarea', rows:2, ph:'Exposición, argumento, conexión con el texto...'},
+      {id:'pt2', label:'Punto 2', tipo:'input', ph:'Título del segundo punto'},
+      {id:'pt2_dev', label:'Desarrollo del punto 2', tipo:'textarea', rows:2, ph:''},
+      {id:'pt3', label:'Punto 3 (opcional)', tipo:'input', ph:'Título del tercer punto'},
+      {id:'pt3_dev', label:'Desarrollo del punto 3', tipo:'textarea', rows:2, ph:''}
+    ]
+  },
+  {
+    id:'ilustracion', titulo:'Ilustraciones', badge:'IL',
+    color:'#FAECE7', colorText:'#712B13',
+    hint:'La ventana que deja entrar la luz',
+    campos:[
+      {id:'il1_tipo', label:'Tipo de ilustración principal', tipo:'select',
+        opts:['Historia personal','Noticia o hecho actual','Literaria o película','Cita de autor','Analogía o metáfora','Historia bíblica paralela','Experimento mental']},
+      {id:'il1_texto', label:'Ilustración principal', tipo:'textarea', rows:4,
+        ph:'Escribe la ilustración completa — con inicio, desarrollo y el punto de conexión con el mensaje...'},
+      {id:'il1_punto', label:'¿A qué punto del sermón aplica?', tipo:'input',
+        ph:'ej. Refuerza el punto 1 — nuestra tendencia a buscar el momento perfecto'},
+      {id:'il2', label:'Ilustración secundaria (opcional)', tipo:'textarea', rows:2,
+        ph:'Una analogía breve, una cita, o un ejemplo cotidiano...'}
+    ]
+  },
+  {
+    id:'aplicacion', titulo:'Aplicación', badge:'AP',
+    color:'#FBEAF0', colorText:'#72243E',
+    hint:'¿Qué debe hacer, creer o sentir la audiencia?',
+    campos:[
+      {id:'ap_cognitiva', label:'Aplicación cognitiva — ¿qué deben creer?', tipo:'textarea', rows:2,
+        ph:'ej. Reconocer que Jesús tiene interés personal en nuestra condición, no solo en cumplir una tarea'},
+      {id:'ap_afectiva', label:'Aplicación afectiva — ¿qué deben sentir?', tipo:'textarea', rows:2,
+        ph:'ej. Esperanza renovada para quienes llevan años esperando un cambio'},
+      {id:'ap_volitiva', label:'Aplicación volitiva — ¿qué deben hacer esta semana?', tipo:'textarea', rows:3,
+        ph:'ej. Identificar un área donde llevan años paralizados y traerla a Jesús en oración esta semana'},
+      {id:'ap_preguntas', label:'Preguntas de reflexión personal', tipo:'textarea', rows:3,
+        ph:'¿En qué área de tu vida le estás diciendo a Dios que esperarás mejores condiciones?\n¿Qué significa para ti escuchar "levántate" hoy?'}
+    ]
+  },
+  {
+    id:'conclusion', titulo:'Conclusión y llamado', badge:'CL',
+    color:'#F1EFE8', colorText:'#444441',
+    hint:'El aterrizaje — no un resumen sino un impulso',
+    campos:[
+      {id:'cl_tipo', label:'Tipo de llamado', tipo:'select',
+        opts:['Invitación a fe','Compromiso de obediencia','Tiempo de oración','Respuesta de adoración','Reflexión en silencio','Acto simbólico (comunión, etc.)']},
+      {id:'cl_texto', label:'Párrafo de cierre', tipo:'textarea', rows:4,
+        ph:'Las últimas palabras del sermón — deben resonar. No resumas, impulsa...'},
+      {id:'cl_oracion', label:'Oración de cierre sugerida', tipo:'textarea', rows:3,
+        ph:'El flujo de la oración que llevará a la congregación a responder al mensaje...'}
+    ]
+  },
+  {
+    id:'notas', titulo:'Notas de preparación', badge:'NT',
+    color:'#EBF1F8', colorText:'#1B4A7A',
+    hint:'Recursos y consideraciones logísticas',
+    campos:[
+      {id:'tiempo', label:'Tiempo estimado', tipo:'select',
+        opts:['20-25 min','25-35 min','35-45 min','45-55 min','55+ min']},
+      {id:'recursos', label:'Recursos bibliográficos consultados', tipo:'textarea', rows:2,
+        ph:'Comentarios, libros, artículos, estudios word...'},
+      {id:'multimedia', label:'Apoyos visuales o multimedia', tipo:'input',
+        ph:'ej. Mapa del estanque de Betesda; imagen del pórtico de las 5 columnas'},
+      {id:'notas_lib', label:'Notas de predicación / libertad', tipo:'textarea', rows:2,
+        ph:'Puntos donde puedes extenderte o acortar según la dinámica del momento...'}
+    ]
+  }
+];
+
+function renderSecciones(){
+  const c = document.getElementById('secciones');
+  c.innerHTML = SECCIONES.map(s=>`
+    <div class="section-card">
+      <div class="section-header" onclick="toggleSec('${s.id}')">
+        <div class="section-badge" style="background:${s.color};color:${s.colorText}">${s.badge}</div>
+        <span class="section-title">${s.titulo}</span>
+        <span class="section-hint">${s.hint}</span>
+        <span class="chevron" id="chev-${s.id}">▶</span>
+      </div>
+      <div class="section-body" id="body-${s.id}">
+        ${s.campos.map(f=>renderCampo(f)).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCampo(f){
+  if(f.tipo==='select'){
+    const opts = f.opts.map(o=>`<option>${o}</option>`).join('');
+    return `<div class="sub-field"><label>${f.label}</label><select id="f_${f.id}" onchange="actualizarProgreso()">${opts}</select></div>`;
+  }
+  if(f.tipo==='textarea'){
+    return `<div class="sub-field"><label>${f.label}</label><textarea id="f_${f.id}" rows="${f.rows||3}" placeholder="${f.ph||''}" oninput="actualizarProgreso()"></textarea></div>`;
+  }
+  return `<div class="sub-field"><label>${f.label}</label><input id="f_${f.id}" placeholder="${f.ph||''}" oninput="actualizarProgreso()"/></div>`;
+}
+
+function toggleSec(id){
+  const body = document.getElementById('body-'+id);
+  const chev = document.getElementById('chev-'+id);
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+
+function toggleTag(el, grupo){
+  document.querySelectorAll(`#${grupo}-tags .tag`).forEach(t=>t.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function actualizarProgreso(){
+  const total = SECCIONES.reduce((a,s)=>a+s.campos.length,0) + 3;
+  let llenos = 0;
+  ['titulo','pasaje','predicador'].forEach(id=>{ if(document.getElementById(id)?.value.trim()) llenos++; });
+  SECCIONES.forEach(s=>s.campos.forEach(f=>{
+    const el = document.getElementById('f_'+f.id);
+    if(el && el.value.trim()) llenos++;
+  }));
+  const pct = Math.round(llenos/total*100);
+  document.getElementById('prog').style.width = pct+'%';
+  document.getElementById('prog-pct').textContent = pct+'%';
+}
+
+function getValor(id){ return document.getElementById(id)?.value.trim()||''; }
+
+function exportar(){
+  const proposito = document.querySelector('#proposito-tags .tag.sel')?.textContent||'';
+  let txt = '';
+  txt += `SERMÓN — ${getValor('titulo')||'Sin título'}\n`;
+  txt += `${'═'.repeat(60)}\n\n`;
+  txt += `Pasaje    : ${getValor('pasaje')}\n`;
+  txt += `Fecha     : ${getValor('fecha')}\n`;
+  txt += `Predicador: ${getValor('predicador')}\n`;
+  txt += `Serie     : ${getValor('serie')}\n`;
+  txt += `Propósito : ${proposito}\n\n`;
+  SECCIONES.forEach(s=>{
+    txt += `${'─'.repeat(60)}\n`;
+    txt += `${s.badge} ${s.titulo.toUpperCase()}\n`;
+    txt += `${'─'.repeat(60)}\n`;
+    s.campos.forEach(f=>{
+      const v = getValor('f_'+f.id);
+      if(v) txt += `${f.label}:\n${v}\n\n`;
+    });
+  });
+  const out = document.getElementById('export-out');
+  const wrap = document.getElementById('export-wrap');
+  out.textContent = txt;
+  wrap.style.display = 'block';
+}
+
+function copiarExport(){
+  exportar();
+  const txt = document.getElementById('export-out').textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const m = document.getElementById('copied');
+    m.style.display='inline';
+    setTimeout(()=>m.style.display='none',2500);
+  });
+}
+
+function limpiar(){
+  if(!confirm('¿Limpiar todos los campos y empezar una nueva plantilla?')) return;
+  ['titulo','pasaje','fecha','predicador','serie'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.value='';
+  });
+  SECCIONES.forEach(s=>s.campos.forEach(f=>{
+    const el = document.getElementById('f_'+f.id);
+    if(el) el.value='';
+  }));
+  document.querySelectorAll('.tag.sel').forEach(t=>t.classList.remove('sel'));
+  document.querySelectorAll('.section-body.open').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('.chevron.open').forEach(c=>c.classList.remove('open'));
+  document.getElementById('export-wrap').style.display='none';
+  actualizarProgreso();
+}
+
+document.getElementById('fecha').value = new Date().toISOString().split('T')[0];
+renderSecciones();
+</script>
+</body>
+</html>
